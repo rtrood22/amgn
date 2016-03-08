@@ -76,13 +76,13 @@
                 <input type="number"  id="numY" value="50"><br>
                 <label>Select the region of random antigen simulation:</label><br>
                 <label for="minX">Min x: </label>
-                <input type="number" id="minX" value="0">
+                <input type="number" id="minX" value="20">
                 <label for="maxX">Max x: </label>
-                <input type="number" id="maxX" value="100">
+                <input type="number" id="maxX" value="30">
                 <label for="minY">Min y: </label>
-                <input type="number" id="minY" value="0">
+                <input type="number" id="minY" value="20">
                 <label for="maxY">Max y: </label>
-                <input type="number" id="maxY" value="100" ><br>
+                <input type="number" id="maxY" value="30" ><br>
                 <label for="agLevel">Antigen Level: </label>
                 <input type="number" id="agLevel" value="50"><br>
                 <label for="probAgStim">Probability for each cell to be selected for antigen stimulation: </label>
@@ -174,7 +174,7 @@
                         }
                         materialEnv[x][y] = new BABYLON.StandardMaterial("Environment material", scene);
                         env[x][y].material = materialEnv[x][y];
-                        env[x][y].material.alpha = 0; // initial extracellular IL-2 concentration set to zero
+                        env[x][y].material.alpha = 1; // initial extracellular IL-2 concentration set to zero
                         env[x][y].material.emissiveColor = new BABYLON.Color3(0.2, 0.5, 0.2);
                         env[x][y].material.diffuseColor = new BABYLON.Color3(0.2, 0.5, 0.2);
                         env[x][y].material.ambientColor = new BABYLON.Color3(0.2, 0.5, 0.2);
@@ -222,12 +222,7 @@
                 //Canvas background color
                 scene.clearColor = new BABYLON.Color3(1, 1, 1);
 
-                //Setting initial values for adaptation
-                var mu0 = 0.1;
-                var epsilon = 0.000001;
-                var w1 = 0.1;
-                var w2 = 0.1;
-                var iteration = 0;
+               
 
                 scene.registerBeforeRender(function () {
 
@@ -239,17 +234,7 @@
 
                     document.getElementById("iteration").innerText = "Iteration: " + iteration;
 
-                    //adaptation
-                    for (var x = 1; x < numX - 1; x++) {
-                        for (var y = 1; y < numY - 1; y++) {
-                            cell[x][y].material.alpha = w1 * env[x][y].material.alpha + w2 * antigen[x][y];
-                            error = env[x][y].material.alpha - cell[x][y].material.alpha;
-                            mu = mu0 / (epsilon + Math.pow(env[x][y].material.alpha, 2) + Math.pow(antigen[x][y], 2));
-                            w1 = w1 + mu * error * env[x][y].material.alpha;
-                            w2 = w2 + mu * error * antigen[x][y];
-                            env[x][y].material.alpha = cell[x][y].material.alpha;
-                        }
-                    }
+                   
                     // diffusion
                     for (var x = 1; x < numX - 1; x++) {
                         for (var y = 1; y < numY - 1; y++) {
