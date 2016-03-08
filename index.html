@@ -18,7 +18,6 @@
 
         <!-- Style -->
         <style type = "text/css">
-
             body {
                 overflow: scroll;
                 width: 100%;
@@ -201,10 +200,6 @@
                     }
                     document.getElementById("iteration").innerText = "Iteration: " + iteration;
                     
-                    
-                    //insert concentration at 25,25
-                    
-                    env[25][25].material.alpha=1;
                     // diffusion
                     for (var x = 1; x < numX - 1; x++) {
                         for (var y = 1; y < numY - 1; y++) {
@@ -255,4 +250,3 @@
         </script>
     </body>
 </html>
-        
