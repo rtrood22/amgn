@@ -189,10 +189,9 @@
                 //Canvas background color
                 scene.clearColor = new BABYLON.Color3(1, 1, 1);
                 //Setting initial values for adaptation
-                var mu0 = 0.1;
+               
                 var epsilon = 0.000001;
-                var w1 = 0.1;
-                var w2 = 0.1;
+              
                 var iteration = 0;
                 scene.registerBeforeRender(function () {
                     if (document.getElementById("rotateCamera").checked) {
@@ -201,17 +200,7 @@
                         camera.radius -= 0.001*numX ;
                     }
                     document.getElementById("iteration").innerText = "Iteration: " + iteration;
-                    //adaptation
-                    for (var x = 1; x < numX - 1; x++) {
-                        for (var y = 1; y < numY - 1; y++) {
-                            cell[x][y].material.alpha = w1 * env[x][y].material.alpha + w2 * antigen[x][y];
-                            error = env[x][y].material.alpha - cell[x][y].material.alpha;
-                            mu = mu0 / (epsilon + Math.pow(env[x][y].material.alpha, 2) + Math.pow(antigen[x][y], 2));
-                            w1 = w1 + mu * error * env[x][y].material.alpha;
-                            w2 = w2 + mu * error * antigen[x][y];
-                            env[x][y].material.alpha = cell[x][y].material.alpha;
-                        }
-                    }
+                    
                     // diffusion
                     for (var x = 1; x < numX - 1; x++) {
                         for (var y = 1; y < numY - 1; y++) {
