@@ -158,7 +158,7 @@
                         }
                         materialEnv[x][y] = new BABYLON.StandardMaterial("Environment material", scene);
                         env[x][y].material = materialEnv[x][y];
-                        env[x][y].material.alpha = 1; // initial extracellular IL-2 concentration set to zero
+                        env[x][y].material.alpha = 0; // initial extracellular IL-2 concentration set to zero
                         env[x][y].material.emissiveColor = new BABYLON.Color3(0.2, 0.5, 0.2);
                         env[x][y].material.diffuseColor = new BABYLON.Color3(0.2, 0.5, 0.2);
                         env[x][y].material.ambientColor = new BABYLON.Color3(0.2, 0.5, 0.2);
@@ -176,7 +176,7 @@
                         }
                         materialCell[x][y] = new BABYLON.StandardMaterial("Cell material", scene);
                         cell[x][y].material = materialCell[x][y];
-                        cell[x][y].material.alpha = 0; // initial intracellular IL-2 concentration set to yero
+                        cell[x][y].material.alpha = 1; // initial intracellular IL-2 concentration set to yero
                         cell[x][y].material.emissiveColor = new BABYLON.Color3(0.8, 0.2, 0.2);
                         cell[x][y].material.diffuseColor = new BABYLON.Color3(0.8, 0.2, 0.2);
                         cell[x][y].material.ambientColor = new BABYLON.Color3(0.8, 0.2, 0.2);
